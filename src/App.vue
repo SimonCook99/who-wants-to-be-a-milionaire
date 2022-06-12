@@ -60,7 +60,21 @@
       </div>
     </div>
     <div class="game-container end" v-else>
-      <h1 style="color:white;">Complimenti, hai completato tutte le domande</h1>
+      <h1 style="color:white;">Hai completato tutte le domande, ecco i risultati</h1>
+
+      <div class="results">
+        <ul class="user">
+          <h2>Le tue risposte:</h2>
+          <li class="user-answers" v-for="(answer, index) in risposteUtente" :key="index">{{answer}}</li>
+        </ul>
+
+        <ul class="CPU">
+          <h2>Le risposte corrette:</h2>
+          <li v-for="(answer, index) in risposteEsatte" :key="index">{{answer}}</li>
+        </ul>
+      </div>
+
+      <h2 style="color:white;">Hai risposto correttamente a {{score}} domande</h2>
     </div>
   </main>
 </template>
@@ -147,7 +161,10 @@ export default {
       ],
       /* primaDomanda : false, */
 
-      awardIndex: 11 //assegno la lunghezza dell'array "listaMontepremi", servirà per scorrere la lista in base alle risposte dell'utente
+      awardIndex: 11, //assegno la lunghezza dell'array "listaMontepremi", servirà per scorrere la lista in base alle risposte dell'utente
+      risposteUtente: [],
+      risposteEsatte: []
+
     }
   },
   methods: {
@@ -155,12 +172,15 @@ export default {
 
       let awardsList = document.querySelectorAll('.award'); //mi prendo tutti gli elementi HTML della lista montepremi
 
+      this.risposteUtente.push(risposta);
+      this.risposteEsatte.push(this.listaDomande[this.indiceCasuale].rispostaEsatta);
+
+
       /* if(this.primaDomanda == false){
         this.primaDomanda = true;
         this.awardIndex = awardsList.length - 1;
       } */
 
-      /* console.log(awardsList[this.awardIndex]); */
 
       /*console.log(this.$refs[risposta]); */
 
@@ -207,6 +227,10 @@ export default {
       //se la lunghezza delle domande uscite è uguale alla lista delle domande, il gioco finisce
       if(this.domandeUscite.length == this.listaDomande.length){
         this.giocoTerminato = true;
+        console.log(this.risposteUtente);
+        console.log(this.risposteEsatte);
+
+        setTimeout(this.showResults, 200);
       }
 
       /* console.log(this.domandeUscite);
@@ -219,6 +243,19 @@ export default {
       //rimuovo le classi della risposta alla domanda precedente
       this.$refs[risposta].classList.remove("correct");
       this.$refs[risposta].classList.remove("wrong");
+    },
+
+    showResults(){
+      let user = document.querySelectorAll('.user-answers');
+
+      for(let i = 0; i < this.risposteUtente.length; i++){
+        if(this.risposteUtente[i] == this.risposteEsatte[i]){
+          console.log(user);
+          user[i].classList.add('correct');
+        }else{
+          user[i].classList.add('wrong');
+        }
+      }
     }
   },
   mounted(){
@@ -260,8 +297,28 @@ export default {
 
     &.end{
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+    }
+
+    .results{
+      display: flex;
+      color: white;
+      width: 60%;
+      justify-content: space-around;
+      margin-top: 20px;
+
+      ul{
+        list-style: none;
+
+        .correct{
+          color: green;
+        }
+        .wrong{
+          color: red;
+        }
+      }
     }
 
     .row{
