@@ -50,6 +50,14 @@
           <div class="square bottom-right"></div>
         </button>
       </div>
+
+      <div class="awards-container">
+
+        <div v-for="(award, index) in listaMontepremi" :key="index" :class="index==listaMontepremi.length - 1 ? 'award active' : 'award' ">
+          {{award}}
+        </div>
+        
+      </div>
     </div>
     <div class="game-container end" v-else>
       <h1 style="color:white;">Complimenti, hai completato tutte le domande</h1>
@@ -66,6 +74,9 @@ export default {
 
       clickDisabilitato: false, //booleano per disabilitare i tasti all'occorrenza
       giocoTerminato: false, //booleano per indicare se il gioco è terminato
+      score: 0,
+
+      
       
       listaDomande: [
         {
@@ -118,11 +129,39 @@ export default {
         },
       ],
       domandeUscite: [], //array che conterrà gli indici delle domande già uscite, così da non ripeterle
-      indiceCasuale: 0 //indice che servirà a pescare una domanda random, dalla lista di domande
+      indiceCasuale: 0, //indice che servirà a pescare una domanda random, dalla lista di domande
+
+      listaMontepremi: [
+        '1.000.000€',
+        '500.000€',
+        '300.000€',
+        '100.000€',
+        '50.000€',
+        '20.000€',
+        '10.000€',
+        '5.000€',
+        '3.000€',
+        '2.000€',
+        '1.000€',
+        '500€'
+      ],
+      primaDomanda : false,
+     /*  awardIndex: this.listaMontepremi.length - 1 */
     }
   },
   methods: {
     checkAnswer(risposta){
+
+      let awardsList = document.querySelectorAll('.award');
+      let awardIndex;
+
+      if(this.primaDomanda == false){
+        this.primaDomanda = true;
+        awardIndex = awardsList.length - 1;
+      }
+
+      console.log(awardsList[awardIndex]);
+
       /* console.log(this.listaDomande);
       console.log("Risposta: " + risposta);
       console.log(this.$refs[risposta]);
@@ -133,11 +172,20 @@ export default {
       //se la risposta passata nella funzione dal click è quella corretta, aggiungo la classe "correct", altrimenti "wrong"
       if(risposta === this.listaDomande[this.indiceCasuale].rispostaEsatta){
         this.$refs[risposta].classList.add("correct");
+        this.score++;
+      
+        awardsList[awardIndex].classList.remove("active");
+        awardIndex--;
+        awardsList[awardIndex].classList.add("active");
 
         setTimeout(this.nextAnswer, 2000, risposta); //dopo 2 secondi passo alla prossima domanda
       }else{
         this.$refs[risposta].classList.add("wrong");
         this.$refs[this.listaDomande[this.indiceCasuale].rispostaEsatta].classList.add("correct");
+
+        awardsList[awardIndex].classList.remove("active");
+        awardIndex = awardsList.length - 1;
+        awardsList[awardIndex].classList.add("active");
 
         setTimeout(this.nextAnswer, 2000, risposta); //dopo 2 secondi passo alla prossima domanda
         
@@ -161,7 +209,7 @@ export default {
       }
 
       /* console.log(this.domandeUscite);
-      console.log("DOmanda successiva: " + this.indiceCasuale); */
+      console.log("Domanda successiva: " + this.indiceCasuale); */
 
       this.domandeUscite.push(this.indiceCasuale);
 
@@ -174,9 +222,8 @@ export default {
   },
   mounted(){
     this.indiceCasuale = Math.floor(Math.random() * this.listaDomande.length);
-    console.log(this.indiceCasuale);
-    console.log(this.listaDomande);
     this.domandeUscite.push(this.indiceCasuale);
+
   }
 }
 </script>
@@ -208,6 +255,7 @@ export default {
   .game-container{
     background-color: #11093A;
     height: 70vh;
+    position: relative;
 
     &.end{
       display: flex;
@@ -361,6 +409,19 @@ export default {
 
 
     }
+
+    .awards-container{
+      color: orange;
+      position: absolute;
+      right: 100px;
+      top: 50px;
+
+      .active{
+        background-color: orange;
+        color: black;
+      }
+    }
+
   }
 
 @media (max-width: 576px) {
