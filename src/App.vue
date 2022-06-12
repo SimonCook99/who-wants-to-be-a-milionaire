@@ -145,27 +145,24 @@ export default {
         '1.000€',
         '500€'
       ],
-      primaDomanda : false,
-     /*  awardIndex: this.listaMontepremi.length - 1 */
+      /* primaDomanda : false, */
+
+      awardIndex: 11 //assegno la lunghezza dell'array "listaMontepremi", servirà per scorrere la lista in base alle risposte dell'utente
     }
   },
   methods: {
     checkAnswer(risposta){
 
-      let awardsList = document.querySelectorAll('.award');
-      let awardIndex;
+      let awardsList = document.querySelectorAll('.award'); //mi prendo tutti gli elementi HTML della lista montepremi
 
-      if(this.primaDomanda == false){
+      /* if(this.primaDomanda == false){
         this.primaDomanda = true;
-        awardIndex = awardsList.length - 1;
-      }
+        this.awardIndex = awardsList.length - 1;
+      } */
 
-      console.log(awardsList[awardIndex]);
+      /* console.log(awardsList[this.awardIndex]); */
 
-      /* console.log(this.listaDomande);
-      console.log("Risposta: " + risposta);
-      console.log(this.$refs[risposta]);
-      console.log(this.listaDomande[this.indiceCasuale].rispostaEsatta); */
+      /*console.log(this.$refs[risposta]); */
 
       this.clickDisabilitato = true; //disabilito i click dei pulsanti quando viene controllata la risposta
 
@@ -174,18 +171,22 @@ export default {
         this.$refs[risposta].classList.add("correct");
         this.score++;
       
-        awardsList[awardIndex].classList.remove("active");
-        awardIndex--;
-        awardsList[awardIndex].classList.add("active");
+
+        //passo alla ricompensa successiva, togliendo la classe "active" dal premio corrente e mettendola in quella successiva
+        awardsList[this.awardIndex].classList.remove("active");
+        this.awardIndex--;
+        awardsList[this.awardIndex].classList.add("active");
 
         setTimeout(this.nextAnswer, 2000, risposta); //dopo 2 secondi passo alla prossima domanda
       }else{
         this.$refs[risposta].classList.add("wrong");
         this.$refs[this.listaDomande[this.indiceCasuale].rispostaEsatta].classList.add("correct");
 
-        awardsList[awardIndex].classList.remove("active");
-        awardIndex = awardsList.length - 1;
-        awardsList[awardIndex].classList.add("active");
+
+        //tolgo la classe "active" del premio corrente, e lo resetto al primo stato (cioè l'ultimo dell'array)
+        awardsList[this.awardIndex].classList.remove("active");
+        this.awardIndex = awardsList.length - 1;
+        awardsList[this.awardIndex].classList.add("active");
 
         setTimeout(this.nextAnswer, 2000, risposta); //dopo 2 secondi passo alla prossima domanda
         
@@ -415,10 +416,13 @@ export default {
       position: absolute;
       right: 100px;
       top: 50px;
+      width: 100px;
 
       .active{
         background-color: orange;
         color: black;
+        border: 2px solid white;
+        border-radius: 5px;
       }
     }
 
