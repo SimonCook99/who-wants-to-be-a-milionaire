@@ -75,6 +75,7 @@
       </div>
 
       <h2 style="color:white;">Hai risposto correttamente a {{score}} domande</h2>
+      <h2 id="result"></h2>
     </div>
   </main>
 </template>
@@ -161,7 +162,7 @@ export default {
       ],
       /* primaDomanda : false, */
 
-      awardIndex: 11, //assegno la lunghezza dell'array "listaMontepremi", servirà per scorrere la lista in base alle risposte dell'utente
+      awardIndex: null, //assegno la lunghezza dell'array "listaMontepremi", servirà per scorrere la lista in base alle risposte dell'utente
       risposteUtente: [],
       risposteEsatte: []
 
@@ -230,7 +231,11 @@ export default {
         console.log(this.risposteUtente);
         console.log(this.risposteEsatte);
 
-        setTimeout(this.showResults, 200);
+        let risultatoMontepremi = document.querySelector(".active").innerText;
+        console.log(risultatoMontepremi);
+
+        //mostro i risultati, mostrando il montepremi guadagnato
+        setTimeout(this.showResults, 200, risultatoMontepremi);
       }
 
       /* console.log(this.domandeUscite);
@@ -245,22 +250,26 @@ export default {
       this.$refs[risposta].classList.remove("wrong");
     },
 
-    showResults(){
+    showResults(montepremi){
       let user = document.querySelectorAll('.user-answers');
 
+      //scorro tra le risposte utente, e assegno la classe corretta in base alla risposta esatta o sbagliata
       for(let i = 0; i < this.risposteUtente.length; i++){
         if(this.risposteUtente[i] == this.risposteEsatte[i]){
-          console.log(user);
           user[i].classList.add('correct');
         }else{
           user[i].classList.add('wrong');
         }
       }
+
+      document.getElementById("result").innerText = "Hai guadagnato " + montepremi;
     }
   },
   mounted(){
     this.indiceCasuale = Math.floor(Math.random() * this.listaDomande.length);
     this.domandeUscite.push(this.indiceCasuale);
+
+    this.awardIndex = this.listaMontepremi.length - 1;
 
   }
 }
@@ -300,6 +309,11 @@ export default {
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      color: white;
+
+      h2#result{
+        color: orange;
+      }
     }
 
     .results{
