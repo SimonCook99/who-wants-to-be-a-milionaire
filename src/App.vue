@@ -158,9 +158,9 @@ export default {
         '3.000€',
         '2.000€',
         '1.000€',
-        '500€'
+        '500€',
+        '0€'
       ],
-      /* primaDomanda : false, */
 
       awardIndex: null, //assegno la lunghezza dell'array "listaMontepremi", servirà per scorrere la lista in base alle risposte dell'utente
       risposteUtente: [],
@@ -175,13 +175,6 @@ export default {
 
       this.risposteUtente.push(risposta);
       this.risposteEsatte.push(this.listaDomande[this.indiceCasuale].rispostaEsatta);
-
-
-      /* if(this.primaDomanda == false){
-        this.primaDomanda = true;
-        this.awardIndex = awardsList.length - 1;
-      } */
-
 
       /*console.log(this.$refs[risposta]); */
 
@@ -228,22 +221,14 @@ export default {
       //se la lunghezza delle domande uscite è uguale alla lista delle domande, il gioco finisce
       if(this.domandeUscite.length == this.listaDomande.length){
         this.giocoTerminato = true;
-        console.log(this.risposteUtente);
-        console.log(this.risposteEsatte);
 
         let risultatoMontepremi = document.querySelector(".active").innerText;
-        console.log(risultatoMontepremi);
 
         //mostro i risultati, mostrando il montepremi guadagnato
         setTimeout(this.showResults, 200, risultatoMontepremi);
       }
 
-      /* console.log(this.domandeUscite);
-      console.log("Domanda successiva: " + this.indiceCasuale); */
-
       this.domandeUscite.push(this.indiceCasuale);
-
-      console.log(this.domandeUscite);
       
       //rimuovo le classi della risposta alla domanda precedente
       this.$refs[risposta].classList.remove("correct");
@@ -339,6 +324,42 @@ export default {
       justify-content: center;
     }
 
+    .square{
+      position: absolute;
+      background-color: #11093A;
+      width: 30px;
+      height: 30px;
+      z-index: 1;
+
+      &.up-left{
+        top: -16px;
+        left: -15px;
+        transform: rotate(45deg);
+        border-right: 2px solid white;
+      }
+
+      &.up-right{
+        top: -16px;
+        right: -15px;
+        transform: rotate(45deg);
+        border-bottom: 2px solid white;
+      }
+
+      &.bottom-left{
+        bottom: -16px;
+        left: -15px;
+        transform: rotate(45deg);
+        border-top: 2px solid white;
+      }
+
+      &.bottom-right{
+        bottom: -16px;
+        right: -15px;
+        transform: rotate(45deg);
+        border-left: 2px solid white;
+      }
+    }
+
     .question{
       color: white;
       position: relative;
@@ -347,48 +368,11 @@ export default {
       border: 2px solid white;
       display: flex;
       justify-content: center;
-      /* clip-path: polygon(10% 0, 88% 0, 100% 50%, 88% 100%, 11% 100%, 1% 50%); */
       /* clip-path: polygon(90% 25%, 100% 50%, 90% 75%, 10% 75%, 0 50%, 10% 25%); */
 
-      .square{
-        position: absolute;
-        background-color: #11093A;
-        width: 30px;
-        height: 30px;
-        z-index: 1;
-
-        &.up-left{
-          top: -15px;
-          left: -15px;
-          transform: rotate(45deg);
-          border-right: 2px solid white;
-        }
-
-        &.up-right{
-          top: -16px;
-          right: -15px;
-          transform: rotate(45deg);
-          border-bottom: 2px solid white;
-        }
-
-        &.bottom-left{
-          bottom: -14px;
-          left: -15px;
-          transform: rotate(45deg);
-          border-top: 2px solid white;
-        }
-
-        &.bottom-right{
-          bottom: -14px;
-          right: -15px;
-          transform: rotate(45deg);
-          border-left: 2px solid white;
-        }
-      }
     }
 
     .answers{
-      
       width: 50%;
       justify-content: center;
       position: relative;
@@ -424,50 +408,12 @@ export default {
         /* clip-path: polygon(90% 25%, 100% 50%, 90% 75%, 10% 75%, 0 50%, 10% 25%); */
 
 
-
         &:hover:not(.wrong):not(.correct){
           background-color: white;
           color: black;
           cursor: pointer;
         }
       }
-
-      .square{
-        position: absolute;
-        background-color: #11093A;
-        width: 30px;
-        height: 30px;
-        z-index: 1;
-
-        &.up-left{
-          top: -15px;
-          left: -15px;
-          transform: rotate(45deg);
-          border-right: 2px solid white;
-        }
-
-        &.up-right{
-          top: -15px;
-          right: -15px;
-          transform: rotate(45deg);
-          border-bottom: 2px solid white;
-        }
-
-        &.bottom-left{
-          bottom: -16px;
-          left: -15px;
-          transform: rotate(45deg);
-          border-top: 2px solid white;
-        }
-
-        &.bottom-right{
-          bottom: -16px;
-          right: -15px;
-          transform: rotate(45deg);
-          border-left: 2px solid white;
-        }
-      }
-
 
       button:disabled:not(.wrong):not(.correct){
         border: 2px solid white;
@@ -478,7 +424,6 @@ export default {
           color: white;
         }
       }
-
 
     }
 
