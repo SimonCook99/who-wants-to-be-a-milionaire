@@ -111,12 +111,12 @@ export default {
           rispostaEsatta: "frontend"
         },
         {
-          domanda: "Quanto bestemmierò per fare i bordi delle risposte?",
-          a: "un casino",
-          b: "tantissimo",
-          c: "non tanto",
-          d: "Voglio morire",
-          rispostaEsatta: "tantissimo"
+          domanda: "Quale di questi è un selettore CSS valido?",
+          a: "ul li:first-child",
+          b: "input[type=radio]:checked",
+          c: "button:hover:not(#example)",
+          d: "tutte le risposte precedenti",
+          rispostaEsatta: "tutte le risposte precedenti"
         },
         {
           domanda: "Quale dei seguenti è un linguaggio di programmazione server side?",
