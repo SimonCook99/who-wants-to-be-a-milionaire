@@ -6,7 +6,7 @@
 
     <div class="game-container" v-if="this.giocoTerminato == false">
       <div class="row">
-        <div class="col-4 question">
+        <div class="col-5 question">
           <p>{{listaDomande[indiceCasuale].domanda}}</p>
 
           <div class="square up-left"></div>
@@ -90,17 +90,16 @@ export default {
       clickDisabilitato: false, //booleano per disabilitare i tasti all'occorrenza
       giocoTerminato: false, //booleano per indicare se il gioco è terminato
       score: 0,
-
       
       
       listaDomande: [
         {
-          domanda: "Chi è stato il primo insegnante boolean?",
-          a: "Michele",
-          b: "Fabio",
-          c: "Chiara",
-          d: "Luca",
-          rispostaEsatta: "Fabio"
+          domanda: "Che differenza c'è tra l'operatore di concatenazione in PHP, con quello di Javascript?",
+          b: "Javascript usa '+' mentre PHP usa '&' ",
+          a: "Javascript usa '.' mentre PHP usa '+'  ",
+          c: "Javascript usa '+' mentre PHP usa '.' ",
+          d: "Non ci sono differenze di concatenazione",
+          rispostaEsatta: "Javascript usa '+' mentre PHP usa '.' "
         },
         {
           domanda: "Html è un linguaggio frontend o backend?",
@@ -127,6 +126,14 @@ export default {
           rispostaEsatta: "PHP"
         },
         {
+          domanda: "L'acronimo HTML sta per...",
+          a: "HyperText Machine Language",
+          b: "HyperText Markup Language",
+          c: "HighText Marking Language",
+          d: "HyperText Marking Language",
+          rispostaEsatta: "HyperText Markup Language"
+        },
+        {
           domanda: "Una funzione che richiama se stessa è detta:",
           a: "Ridondante",
           b: "Iterativa",
@@ -135,12 +142,52 @@ export default {
           rispostaEsatta: "Ricorsiva"
         },
         {
+          domanda: "Se non viene specificato ASC o DESC a seguito di un ORDER BY in SQL, il suo valore di default sarà: ",
+          a: "ASC",
+          b: "DESC",
+          c: "nessuno dei due",
+          d: "Nessun valore di default",
+          rispostaEsatta: "ASC"
+        },
+        {
+          domanda: "Per convenzione, di solito i nomi dei Model su Laravel sono sempre al...",
+          a: "plurale",
+          b: "singolare, senza spazi tra le parole",
+          c: "singolare, con spazi quando necessario",
+          d: "Nessuno dei precedenti",
+          rispostaEsatta: "singolare, senza spazi tra le parole"
+        },
+        {
           domanda: "Qual è il limite massimo di caratteri che ha il VARCHAR di SQL?",
           a: "155",
           b: "55",
           c: "255",
           d: "512",
           rispostaEsatta: "255"
+        },
+        {
+          domanda: "Quali sono i metodi presenti nelle migrations in Laravel?",
+          a: "run() e delete()",
+          b: "update() e delete()",
+          c: "up() e down()",
+          d: "execute() e rollback()",
+          rispostaEsatta: "up() e down()"
+        },
+        {
+          domanda: "Quale comando di SQL viene utilizzato per unire i dati di una o più tabelle?",
+          a: "SELECT",
+          b: "JOIN",
+          c: "PRODUCT",
+          d: "FUSION",
+          rispostaEsatta: "JOIN"
+        },
+        {
+          domanda: "Quale dei seguenti non è un evento in Javascript?",
+          a: "onclick",
+          b: "onmousescroller",
+          c: "onmouseover",
+          d: "onmousemove",
+          rispostaEsatta: "onmousescroller"
         },
       ],
       domandeUscite: [], //array che conterrà gli indici delle domande già uscite, così da non ripeterle
@@ -364,6 +411,7 @@ export default {
       color: white;
       position: relative;
       margin: 20px 0px;
+      text-align: center;
       /* padding: 10px; */
       border: 2px solid white;
       display: flex;
