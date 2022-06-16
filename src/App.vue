@@ -53,7 +53,7 @@
 
       <div class="awards-container">
 
-        <div v-for="(award, index) in listaMontepremi" :key="index" :class="index==listaMontepremi.length - 1 ? 'award active' : 'award' ">
+        <div v-for="(award, index) in listaMontepremi" :key="index" :class="index==listaMontepremi.length - 1 ? 'award active' : index==6 ? 'award checkpoint' : 'award' ">
           {{award}}
         </div>
         
@@ -90,8 +90,13 @@ export default {
       clickDisabilitato: false, //booleano per disabilitare i tasti all'occorrenza
       giocoTerminato: false, //booleano per indicare se il gioco è terminato
       score: 0,
+      domandeUscite: [], //array che conterrà gli indici delle domande già uscite, così da non ripeterle
+      indiceCasuale: 0, //indice che servirà a pescare una domanda random, dalla lista di domande
+
+      awardIndex: null, //assegno la lunghezza dell'array "listaMontepremi", servirà per scorrere la lista in base alle risposte dell'utente
       
-      
+      checkpointRaggiunto: false, //booleano per indicare se è stato raggiunto il checkpoint del montepremi (10.000€)
+
       listaDomande: [
         {
           domanda: "Che differenza c'è tra l'operatore di concatenazione in PHP, con quello di Javascript?",
@@ -190,8 +195,6 @@ export default {
           rispostaEsatta: "onmousescroller"
         },
       ],
-      domandeUscite: [], //array che conterrà gli indici delle domande già uscite, così da non ripeterle
-      indiceCasuale: 0, //indice che servirà a pescare una domanda random, dalla lista di domande
 
       listaMontepremi: [
         '1.000.000€',
@@ -209,9 +212,9 @@ export default {
         '0€'
       ],
 
-      awardIndex: null, //assegno la lunghezza dell'array "listaMontepremi", servirà per scorrere la lista in base alle risposte dell'utente
-      risposteUtente: [],
-      risposteEsatte: []
+      risposteUtente: [], //questi 2 array saranno utilizzati per mostrare i risultati delle domande alla fine del gioco
+      risposteEsatte: [],
+      
 
     }
   },
@@ -219,6 +222,9 @@ export default {
     checkAnswer(risposta){
 
       let awardsList = document.querySelectorAll('.award'); //mi prendo tutti gli elementi HTML della lista montepremi
+      
+      //l'utente guadagnerà il checkpoint quando lo supererà, ecco perchè la variabile è 20.000 anche se il checkpoint è 10.000
+      let checkPoint = '20.000€'; 
 
       this.risposteUtente.push(risposta);
       this.risposteEsatte.push(this.listaDomande[this.indiceCasuale].rispostaEsatta);
@@ -246,12 +252,26 @@ export default {
 
         //tolgo la classe "active" del premio corrente, e lo resetto al primo stato (cioè l'ultimo dell'array)
         awardsList[this.awardIndex].classList.remove("active");
-        this.awardIndex = awardsList.length - 1;
+
+        //sistemo l'indice della ricompensa attiva, in base al fatto che l'utente abbia raggiunto o meno il checkpoint
+        if(this.checkpointRaggiunto){
+          this.awardIndex = 6
+        }else{
+          this.awardIndex = awardsList.length - 1;
+        }
+
         awardsList[this.awardIndex].classList.add("active");
+        /* console.log(awardsList[this.awardIndex]); */
 
         setTimeout(this.nextAnswer, 2000, risposta); //dopo 2 secondi passo alla prossima domanda
         
       }
+
+      //quando la ricompensa attiva arriva al checkpoint, setto la variabile a true
+      if(document.querySelector('.award.active').innerText == checkPoint){
+        this.checkpointRaggiunto = true;
+      }
+
     },
     nextAnswer(risposta){
 
@@ -487,6 +507,10 @@ export default {
         color: black;
         border: 2px solid white;
         border-radius: 5px;
+      }
+
+      .checkpoint{
+        color: white;
       }
     }
 
