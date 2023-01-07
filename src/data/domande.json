@@ -1,0 +1,98 @@
+[
+    {
+      "domanda": "Che differenza c'è tra l'operatore di concatenazione in PHP, con quello di Javascript?",
+      "b": "Javascript usa '+' mentre PHP usa '&' ",
+      "a": "Javascript usa '.' mentre PHP usa '+'  ",
+      "c": "Javascript usa '+' mentre PHP usa '.' ",
+      "d": "Non ci sono differenze di concatenazione",
+      "rispostaEsatta": "Javascript usa '+' mentre PHP usa '.' "
+    },
+    {
+      "domanda": "Html è un linguaggio frontend o backend?",
+      "a": "frontend",
+      "b": "backend",
+      "c": "entrambe",
+      "d": "nessuna delle due",
+      "rispostaEsatta": "frontend"
+    },
+    {
+      "domanda": "Quale di questi è un selettore CSS valido?",
+      "a": "ul li:first-child",
+      "b": "input[type=radio]:checked",
+      "c": "button:hover:not(#example)",
+      "d": "tutte le risposte precedenti",
+      "rispostaEsatta": "tutte le risposte precedenti"
+    },
+    {
+      "domanda": "Quale dei seguenti è un linguaggio di programmazione server side?",
+      "a": "HTML",
+      "b": "PHP",
+      "c": "C",
+      "d": "JS",
+      "rispostaEsatta": "PHP"
+    },
+    {
+      "domanda": "L'acronimo HTML sta per...",
+      "a": "HyperText Machine Language",
+      "b": "HyperText Markup Language",
+      "c": "HighText Marking Language",
+      "d": "HyperText Marking Language",
+      "rispostaEsatta": "HyperText Markup Language"
+    },
+    {
+      "domanda": "Una funzione che richiama se stessa è detta:",
+      "a": "Ridondante",
+      "b": "Iterativa",
+      "c": "Ripetitiva",
+      "d": "Ricorsiva",
+      "rispostaEsatta": "Ricorsiva"
+    },
+    {
+      "domanda": "Se non viene specificato ASC o DESC a seguito di un ORDER BY in SQL, il suo valore di default sarà: ",
+      "a": "ASC",
+      "b": "DESC",
+      "c": "nessuno dei due",
+      "d": "Nessun valore di default",
+      "rispostaEsatta": "ASC"
+    },
+    {
+      "domanda": "Per convenzione, di solito i nomi dei Model su Laravel sono sempre al...",
+      "a": "plurale",
+      "b": "singolare, senza spazi tra le parole",
+      "c": "singolare, con spazi quando necessario",
+      "d": "Nessuno dei precedenti",
+      "rispostaEsatta": "singolare, senza spazi tra le parole"
+    },
+    {
+      "domanda": "Qual è il limite massimo di caratteri che ha il VARCHAR di SQL?",
+      "a": "155",
+      "b": "55",
+      "c": "255",
+      "d": "512",
+      "rispostaEsatta": "255"
+    },
+    {
+      "domanda": "Quali sono i metodi presenti nelle migrations in Laravel?",
+      "a": "run() e delete()",
+      "b": "update() e delete()",
+      "c": "up() e down()",
+      "d": "execute() e rollback()",
+      "rispostaEsatta": "up() e down()"
+    },
+    {
+      "domanda": "Quale comando di SQL viene utilizzato per unire i dati di una o più tabelle?",
+      "a": "SELECT",
+      "b": "JOIN",
+      "c": "PRODUCT",
+      "d": "FUSION",
+      "rispostaEsatta": "JOIN"
+    },
+    {
+      "domanda": "Quale dei seguenti non è un evento in Javascript?",
+      "a": "onclick",
+      "b": "onmousescroller",
+      "c": "onmouseover",
+      "d": "onmousemove",
+      "rispostaEsatta": "onmousescroller"
+    }
+  ]
